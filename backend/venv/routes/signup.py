@@ -10,10 +10,16 @@ def signup():
     data = request.get_json()
     email = data.get("email")
     password = data.get("password")
+    firstName = data.get("firstName")
+    lastName = data.get("lastName")
+    address = data.get("address")
+    regNo = data.get("regNo")
+    phoneNumber = data.get("phoneNumber")
 
+    print(data)
     if User.find_by_email(email):
         return jsonify({"error": "User already exist"}), 400
     
-    User.create_user(email, password)
+    User.create_user(email, password, firstName, lastName, address, regNo, phoneNumber)
     return jsonify({"message": "User registered successfully"}), 201
 

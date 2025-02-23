@@ -11,11 +11,16 @@ def create_user_model(db):
         collection = db.users
 
         @staticmethod
-        def create_user(email, password):
+        def create_user(email, password, firstName, lastName, address, regNo, phoneNumber):
             hashed_password = bcrypt.generate_password_hash(password, 10).decode('utf-8')
             user = {
                 "email": email,
                 "password": hashed_password,
+                "firstName": firstName,
+                "lastName": lastName,
+                "address": address,
+                "Registration Number": regNo,
+                "Phone Number": phoneNumber,
                 "created_at": datetime.now(),
                 "verified": False
             }
