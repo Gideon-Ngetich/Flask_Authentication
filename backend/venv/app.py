@@ -12,7 +12,9 @@ from config import Config, mail
 load_dotenv()
 app = Flask(__name__)
 app.config.from_object(Config)
-CORS(app, origins='http://localhost:5173', supports_credentials=True, allow_headers=["Content-Type", "Authorization"])
+# CORS(app, origins='http://localhost:5173', supports_credentials=True, allow_headers=["Content-Type", "Authorization"])
+CORS(app, origins='https://flask-authentication-2qax.onrender.com', supports_credentials=True, allow_headers=["Content-Type", "Authorization"])
+
 mail.init_app(app)
 
 app.config["JWT_SECRET_KEY"] = os.getenv("JWT_SECRET_KEY")
