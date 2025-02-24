@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const LoginForm = () => {
   const [credentials, setCredentials] = useState({
@@ -82,12 +83,12 @@ const LoginForm = () => {
                       </span>
                     </label>
                     <label className="block text-gray-500 font-bold my-4">
-                      <a
-                        href="#"
+                      <Link
+                        to={'/reset-password'}
                         className="cursor-pointer tracking-tighter text-black border-b-2 border-gray-200 hover:border-gray-400"
                       >
                         <span>Forgot Password?</span>
-                      </a>
+                      </Link>
                     </label>
                   </div>
                   <button
@@ -97,6 +98,7 @@ const LoginForm = () => {
                     Login
                   </button>
                 </div>
+                <div className="text-center py-3">Don't have an account <Link to={'/register'} className="text-blue-600">Sign up</Link></div>
               </form>
             </div>
           </div>
