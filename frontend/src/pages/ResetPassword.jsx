@@ -16,7 +16,8 @@ const ResetPassword = () => {
     console.log(email)
     try {
       const response = await axios.post(
-        "http://127.0.0.1:5000/api/request-reset-password",
+        // "http://127.0.0.1:5000/api/request-reset-password",
+        "https://flask-authentication-2qax.onrender.com/api/request-reset-password",
         {email},
         {
           withCredentials: true,

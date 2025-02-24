@@ -11,18 +11,22 @@ const PasswordReset = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     if (password !== confirmPassword) {
       setMessage("Passwords do not match");
       return;
     }
 
     try {
-      const response = await fetch(`http://127.0.0.1:5000/api/reset-password/${token}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ password }),
-      });
+      const response = await fetch(
+        // `http://127.0.0.1:5000/api/reset-password/${token}`,
+        `https://flask-authentication-2qax.onrender.com/api/reset-password/${token}`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ password }),
+        }
+      );
       const data = await response.json();
 
       if (response.ok) {
@@ -42,7 +46,9 @@ const PasswordReset = () => {
         {message && <p className="text-red-500 mb-4">{message}</p>}
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700">New Password</label>
+            <label className="block text-sm font-medium text-gray-700">
+              New Password
+            </label>
             <input
               type="password"
               value={password}
@@ -52,7 +58,9 @@ const PasswordReset = () => {
             />
           </div>
           <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700">Confirm Password</label>
+            <label className="block text-sm font-medium text-gray-700">
+              Confirm Password
+            </label>
             <input
               type="password"
               value={confirmPassword}

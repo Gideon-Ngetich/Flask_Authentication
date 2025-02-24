@@ -24,7 +24,8 @@ const Register = () => {
     try {
       if (formData.confirmpassword === formData.password) {
         const response = await axios.post(
-          "http://127.0.0.1:5000/api/signup",
+          // "http://127.0.0.1:5000/api/signup",
+          "https://flask-authentication-2qax.onrender.com/api/signup",
           formData,
           {
             headers: {
