@@ -16,7 +16,7 @@ def create_user_model(db):
             user = {
                 "email": email,
                 "password": hashed_password,
-                "firstName": firstName,
+                "firstName": firstName,''
                 "lastName": lastName,
                 "address": address,
                 "Registration Number": regNo,
@@ -40,7 +40,7 @@ def create_user_model(db):
         
         @staticmethod
         def update_password(email, new_password):
-            hashed_password = bcrypt.generate_password_hash(new_password, 10)
+            hashed_password = bcrypt.generate_password_hash(new_password, 10).decode('utf-8')
             UserModel.collection.update_one({"email":email}, {"$set": {"password": hashed_password}})
 
     return UserModel

@@ -5,15 +5,19 @@ const ResetPassword = () => {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState(null);
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMessage(null);
     setError(null);
+    setLoading(true)
+
+    console.log(email)
     try {
       const response = await axios.post(
-        "http://127.0.0.1:5000/api/reset-password",
-        email,
+        "http://127.0.0.1:5000/api/request-reset-password",
+        {email},
         {
           withCredentials: true,
           headers: {
@@ -22,11 +26,15 @@ const ResetPassword = () => {
           },
         }
       );
+      setLoading(false)
       setMessage(response.data.message);
     } catch (err) {
+      setLoading(false)
       setError("Failed to send reset link. Please try again.");
     }
   };
+
+  
 
   return (
     <div className="bg-gray-200 min-h-screen font-sans">
@@ -56,6 +64,7 @@ const ResetPassword = () => {
                   >
                     Send Reset Link
                   </button>
+                  {loading && <p className="text-black mt-2">Sending.Please wait</p>}
                   {message && <p className="text-green-600 mt-2">{message}</p>}
                   {error && <p className="text-red-600 mt-2">{error}</p>}
                 </div>

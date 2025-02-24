@@ -24,12 +24,16 @@ def request_password():
     data = request.get_json()
     email = data.get("email")
 
+    print(data)
+
     user = User.find_by_email(email)
     if not user:
         return jsonify({"error": "User not found"})
     
     token = generate_reset_token(email)
-    reset_url = url_for("reset_password.reset_password", token=token, _external= True)
+    frontEnd_url = os.getenv("FRONTEND_URL")
+    # reset_url = url_for("reset_password.reset_password", token=token, _external= True)
+    reset_url = f"{frontEnd_url}/password-reset?token={token}"
 
     msg = Message("Password reset request", recipients=[email], sender=os.getenv("MAIL_DEFAULT_SENDER"))
     msg.body = f"Click the link to reset your password: {reset_url}"
@@ -50,7 +54,7 @@ def reset_password(token):
     if not user:
         return jsonify({"error": "user not found"}), 404
     
-    hashed_password = bcrypt.generate_password_hash(new_password, 10)
-    User.update_password(email, hashed_password)
+    # hashed_password = bcrypt.generate_password_hash(new_password, 10)
+    User.update_password(email, new_password)
 
     return jsonify({"message": "Password rest successful"})
